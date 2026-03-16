@@ -3,6 +3,9 @@
 
 **Bigscreen Beyond 2e (BSB2e) のカメラ映像を EyeTrackVR へ繋ぐブリッジツール**
 
+<details>
+<summary>日本語</summary>
+    
 ---
 
 ## 📝 概要
@@ -43,6 +46,11 @@ BSB2eのカメラ映像はそのままでは EyeTrackVR で直接取り込むこ
 
 ---
 
+</details>
+
+<details>
+<summary>English</summary>
+    
 ## 📝 Overview
 **EyeCameraStreamer** is a lightweight utility designed to convert and stream eye-tracking camera feeds from the **Bigscreen Beyond 2e (BSB2e)** into a format compatible with **EyeTrackVR**.
 
@@ -80,3 +88,4 @@ Since BSB2e camera feeds cannot be directly imported into EyeTrackVR, this tool 
   * [.NET 10.0 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0) (x64)
 
 ---
+</details>
