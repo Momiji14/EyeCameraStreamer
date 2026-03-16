@@ -35,8 +35,8 @@ BSB2eのカメラ映像はそのままでは EyeTrackVR で直接取り込むこ
 2. BSB2e のカメラデバイスを選択し、左右の配信ポート（例: `8080` / `8081`）を設定します。
 3. **Start** をクリックして配信を開始します。
 4. **EyeTrackVR** 側の設定（Camera Address）に以下のURLを入力してください。
-    * **左目**: `http://localhost:8080`
-    * **右目**: `http://localhost:8081`
+    * **左目**: `localhost:8080`
+    * **右目**: `localhost:8081`
 
 ## 📦 インストール / 実行
 * **インストール不要**: ダウンロードしたZIPファイルを展開し、全てのファイルを同じフォルダに置いた状態で `EyeCameraStreamer.exe` を実行してください。
@@ -78,8 +78,8 @@ Since BSB2e camera feeds cannot be directly imported into EyeTrackVR, this tool 
 2. Select the BSB2e camera device and set the desired ports for each eye (e.g., `8080` / `8081`).
 3. Click **Start** to begin streaming.
 4. In the **EyeTrackVR** settings (Camera Address), enter the following URLs:
-    * **Left Eye**: `http://localhost:8080`
-    * **Right Eye**: `http://localhost:8081`
+    * **Left Eye**: `localhost:8080`
+    * **Right Eye**: `localhost:8081`
 
 ## 📦 Installation / Execution
 * **Portable**: No installation required. Extract the ZIP file and ensure all files remain in the same folder before running `EyeCameraStreamer.exe`.
