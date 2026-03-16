@@ -41,8 +41,10 @@ BSB2eのカメラ映像はそのままでは EyeTrackVR で直接取り込むこ
     * **右目**: `http://localhost:8081`
 
 ## 📦 インストール / 実行
-* **インストール不要**: `EyeCameraStreamer.exe` を実行するだけで使用可能です。
+* **インストール不要**: ダウンロードしたZIPファイルを展開し、全てのファイルを同じフォルダに置いた状態で `EyeCameraStreamer.exe` を実行してください。
 * **動作環境**: Windows 11 (x64)
+* **必須ランタイム**: 起動に失敗する場合は、以下のランタイムをインストールしてください。
+  * [.NET 10.0 デスクトップ ランタイム](https://dotnet.microsoft.com/download/dotnet/10.0) (x64)
 
 ---
 
@@ -83,7 +85,9 @@ Since BSB2e camera feeds cannot be directly imported into EyeTrackVR, this tool 
     * **Right Eye**: `http://localhost:8081`
 
 ## 📦 Installation / Execution
-* **Portable**: No installation required. Just run `EyeCameraStreamer.exe`.
+* **Portable**: No installation required. Extract the ZIP file and ensure all files remain in the same folder before running `EyeCameraStreamer.exe`.
 * **System Requirements**: Windows 11 (x64)
+* **Required Runtime**: If the application fails to start, please install the following:
+  * [.NET 10.0 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0) (x64)
 
 ---
