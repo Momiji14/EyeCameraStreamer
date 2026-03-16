@@ -45,3 +45,45 @@ BSB2eのカメラ映像はそのままでは EyeTrackVR で直接取り込むこ
 * **動作環境**: Windows 11 (x64)
 
 ---
+
+## 📝 Overview
+**EyeCameraStreamer** is a lightweight utility designed to convert and stream eye-tracking camera feeds from the **Bigscreen Beyond 2e (BSB2e)** into a format compatible with **EyeTrackVR**.
+
+Since BSB2e camera feeds cannot be directly imported into EyeTrackVR, this tool splits the single camera feed into two separate "Left Eye" and "Right Eye" HTTP MJPEG streams, enabling seamless eye tracking.
+
+## ✨ Features
+
+### 🔗 The Bridge: BSB2e ↔ EyeTrackVR
+* Captures a single camera device and splits the video into two independent HTTP MJPEG streams that EyeTrackVR can process.
+
+### ⚡ Ultra-Low CPU Usage
+* Optimized for VR performance. Processing is minimized when running in the background or when the preview is hidden to ensure zero impact on your VR experience.
+
+### 🌓 Optimized Image Enhancement (CLAHE)
+* Applies real-time Contrast Limited Adaptive Histogram Equalization (CLAHE) to infrared feeds, significantly improving pupil recognition accuracy.
+
+### 🔄 Auto-Reconnect (Auto-Healing)
+* Robust connection management. If a camera cable is unplugged, the tool automatically detects and resumes streaming as soon as it's reconnected.
+
+### 🚀 EyeTrackVR Integration
+* Features a built-in launcher to automatically start the EyeTrackVR application alongside the streamer.
+
+### ⚡️ Zero-Click Setup
+* Once configured, simply launch the app to automate everything:
+    1. **Auto-Start Streaming**: Immediately begins capturing and streaming using your last saved settings.
+    2. **Auto-Launch EyeTrackVR**: Starts the EyeTrackVR app, saving you the hassle of manual setup every time.
+
+## 🚀 How to Use
+
+1. Launch **EyeCameraStreamer**.
+2. Select the BSB2e camera device and set the desired ports for each eye (e.g., `8080` / `8081`).
+3. Click **Start** to begin streaming.
+4. In the **EyeTrackVR** settings (Camera Address), enter the following URLs:
+    * **Left Eye**: `http://localhost:8080`
+    * **Right Eye**: `http://localhost:8081`
+
+## 📦 Installation / Execution
+* **Portable**: No installation required. Just run `EyeCameraStreamer.exe`.
+* **System Requirements**: Windows 11 (x64)
+
+---
