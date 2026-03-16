@@ -15,12 +15,6 @@ BSB2eのカメラ映像はそのままでは EyeTrackVR で直接取り込むこ
 ### 🔗 BSB2e ↔ EyeTrackVR の架け橋
 * 1つのカメラデバイスから取得した映像を左右に分割し、EyeTrackVR が読み取れる2系統の HTTP MJPEG ストリームとして配信します。
 
-### ⚡ 究極の低負荷設計
-* VR体験を邪魔しないよう、バックグラウンド実行時やプレビュー非表示時は処理を最小限に抑え、CPU使用率を極限まで低減しています。
-
-### 🌓 最適な画像補正 (CLAHE)
-* 赤外線カメラ映像にリアルタイムでコントラスト補正をかけ、瞳孔の認識精度を向上させます。
-
 ### 🔄 自動再接続（オートヒーリング）
 * カメラのケーブルが抜けても大丈夫。挿し直せば自動的に検知し、配信を即座に再開します。
 
@@ -58,12 +52,6 @@ Since BSB2e camera feeds cannot be directly imported into EyeTrackVR, this tool 
 
 ### 🔗 The Bridge: BSB2e ↔ EyeTrackVR
 * Captures a single camera device and splits the video into two independent HTTP MJPEG streams that EyeTrackVR can process.
-
-### ⚡ Ultra-Low CPU Usage
-* Optimized for VR performance. Processing is minimized when running in the background or when the preview is hidden to ensure zero impact on your VR experience.
-
-### 🌓 Optimized Image Enhancement (CLAHE)
-* Applies real-time Contrast Limited Adaptive Histogram Equalization (CLAHE) to infrared feeds, significantly improving pupil recognition accuracy.
 
 ### 🔄 Auto-Reconnect (Auto-Healing)
 * Robust connection management. If a camera cable is unplugged, the tool automatically detects and resumes streaming as soon as it's reconnected.
