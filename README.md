@@ -45,4 +45,3 @@ BSB2eのカメラ映像はそのままでは EyeTrackVR で直接取り込むこ
 * **動作環境**: Windows 11 (x64)
 
 ---
-*Developed for the Bigscreen Beyond 2e community.*
