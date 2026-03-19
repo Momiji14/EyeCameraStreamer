@@ -1,9 +1,7 @@
 using DirectShowLib;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
-using System.Collections;
 using System.Diagnostics;
-using System.Windows.Controls;
 
 
 namespace EyeCameraStreamer
@@ -75,6 +73,8 @@ namespace EyeCameraStreamer
 
         private void OnClosing(object sender, FormClosingEventArgs e)
         {
+            if (isStreaming) StopAction();
+
             Properties.Settings.Default.CameraIndex = comboBoxCameras.SelectedIndex;
             Properties.Settings.Default.AutoStart = ckbAutoStart.Checked;
             Properties.Settings.Default.SizeW = int.TryParse(txtW.Text, out int w) ? w : 800;
@@ -208,22 +208,29 @@ namespace EyeCameraStreamer
             
         }
 
-        public void StreamLoop(int index, OpenCvSharp.Size size, CancellationToken token)
+        public void SetCapture(int index, OpenCvSharp.Size size)
         {
-            capture = new VideoCapture(index);
+            capture = new VideoCapture(index, VideoCaptureAPIs.DSHOW);
+            capture.Set(VideoCaptureProperties.FourCC, FourCC.MJPG);
+            capture.Set(VideoCaptureProperties.BufferSize, 1);
+            capture.Set(VideoCaptureProperties.FrameWidth, size.Width);
+            capture.Set(VideoCaptureProperties.FrameHeight, size.Height);
+        }
+
+        public async void StreamLoop(int index, OpenCvSharp.Size size, CancellationToken token)
+        {
+            SetCapture(index, size);
             using var frame = new Mat();
-            int interval = 1000 / fps;
 
             var sw = Stopwatch.StartNew();
-            while (!token.IsCancellationRequested)
+            using var timer = new PeriodicTimer(TimeSpan.FromMilliseconds(1000.0 / fps));
+
+            while (!token.IsCancellationRequested && await timer.WaitForNextTickAsync(token))
             {
                 sw.Restart();
                 if (capture.IsOpened() && capture.Read(frame) && !frame.Empty())
                 {
-                    Cv2.Resize(frame, frame, size);
-
-                    if (frame.Channels() > 1)
-                        Cv2.CvtColor(frame, frame, ColorConversionCodes.BGR2GRAY);
+                    Cv2.CvtColor(frame, frame, ColorConversionCodes.BGR2GRAY);
 
                     if (shouldClahe)
                         ProcessClahe(frame);
@@ -248,17 +255,13 @@ namespace EyeCameraStreamer
                     capture.Dispose();
 
                     pictureBoxPreview.Invoke(() => SetPreviewText(CameraDisconnectedText));
-                    
+
 
                     Thread.Sleep(1000);
-                    capture = new VideoCapture(index);
+                    SetCapture(index, size);
                     if (capture.IsOpened())
                         pictureBoxPreview.Invoke(() => SetPreviewText(shouldPreview ? string.Empty : PreviewPausedText));
                 }
-
-                sw.Stop();
-                int sleepTime = Math.Max(1, interval - (int)sw.ElapsedMilliseconds);
-                if (sleepTime > 0) Thread.Sleep(sleepTime);
             }
             capture.Dispose();
         }
@@ -299,27 +302,26 @@ namespace EyeCameraStreamer
         }
 
         private Queue<long> processTimeHistory = new();
+        private Queue<long> previewTimeHistory = new();
         private void Preview(Mat frame, Stopwatch sw)
         {
-            processTimeHistory.Enqueue(sw.ElapsedMilliseconds);
-            string processTimeText;
-            if (processTimeHistory.Count > historyLength / 3)
-            {
-                processTimeHistory.Dequeue();
-                processTimeText = $"{processTimeHistory.Average():F2}ms";
-            }
-            else
-            {
-                processTimeText = string.Empty;
-            }
+            int historySize = historyLength / 5;
 
+            processTimeHistory.Enqueue(sw.ElapsedMilliseconds);
+            if (processTimeHistory.Count > historySize) processTimeHistory.Dequeue();
+            string processTimeText = $"Live: {processTimeHistory.Average():F2}ms";
 
             var bmp = frame.ToBitmap();
             pictureBoxPreview.Invoke(new Action(() =>
             {
-                ProcessTime.Text = processTimeText;
                 pictureBoxPreview.Image?.Dispose();
                 pictureBoxPreview.Image = bmp;
+
+                previewTimeHistory.Enqueue(sw.ElapsedMilliseconds);
+                if (previewTimeHistory.Count > historySize) previewTimeHistory.Dequeue();
+                string previewTimeText = $"Preview: {previewTimeHistory.Average():F2}ms";
+                
+                ProcessTime.Text = $"{previewTimeText}    {processTimeText}";
             }));
         }
     }
