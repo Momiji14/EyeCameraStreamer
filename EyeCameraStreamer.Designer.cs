@@ -37,7 +37,6 @@
             Label_RightPort = new Label();
             Label_TargetFps = new Label();
             txtFps = new TextBox();
-            ckbNormalize = new CheckBox();
             ckbClahe = new CheckBox();
             txtPreview = new TextBox();
             StaticSetting = new GroupBox();
@@ -47,18 +46,24 @@
             Label_Size = new Label();
             Label_CameraId = new Label();
             EffectSetting = new GroupBox();
+            sliderClahe = new TrackBar();
             ckbAutoStart = new CheckBox();
             ProcessTime = new Label();
             Address = new GroupBox();
             RightAddress = new TextBox();
             LeftAddress = new TextBox();
             ExternalOptions = new GroupBox();
+            Label_ETVR = new Label();
+            btnAffinityApply = new Button();
+            txtAffinity = new TextBox();
+            Label_Affinity = new Label();
             ckbETVR = new CheckBox();
             btnBrowse = new Button();
             txtETVRPath = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBoxPreview).BeginInit();
             StaticSetting.SuspendLayout();
             EffectSetting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)sliderClahe).BeginInit();
             Address.SuspendLayout();
             ExternalOptions.SuspendLayout();
             SuspendLayout();
@@ -90,11 +95,10 @@
             // 
             // pictureBoxPreview
             // 
-            pictureBoxPreview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBoxPreview.BackColor = SystemColors.ActiveCaptionText;
-            pictureBoxPreview.Location = new Point(149, 12);
+            pictureBoxPreview.Location = new Point(149, 20);
             pictureBoxPreview.Name = "pictureBoxPreview";
-            pictureBoxPreview.Size = new Size(639, 383);
+            pictureBoxPreview.Size = new Size(600, 300);
             pictureBoxPreview.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBoxPreview.TabIndex = 2;
             pictureBoxPreview.TabStop = false;
@@ -162,22 +166,11 @@
             txtFps.Text = "30";
             txtFps.TextAlign = HorizontalAlignment.Center;
             // 
-            // ckbNormalize
-            // 
-            ckbNormalize.AutoSize = true;
-            ckbNormalize.FlatStyle = FlatStyle.Flat;
-            ckbNormalize.Location = new Point(6, 22);
-            ckbNormalize.Name = "ckbNormalize";
-            ckbNormalize.Size = new Size(76, 19);
-            ckbNormalize.TabIndex = 11;
-            ckbNormalize.Text = "Normalize";
-            ckbNormalize.UseVisualStyleBackColor = true;
-            // 
             // ckbClahe
             // 
             ckbClahe.AutoSize = true;
             ckbClahe.FlatStyle = FlatStyle.Flat;
-            ckbClahe.Location = new Point(6, 47);
+            ckbClahe.Location = new Point(7, 22);
             ckbClahe.Name = "ckbClahe";
             ckbClahe.Size = new Size(52, 19);
             ckbClahe.TabIndex = 12;
@@ -191,10 +184,10 @@
             txtPreview.BorderStyle = BorderStyle.None;
             txtPreview.Font = new Font("Yu Gothic UI", 36F, FontStyle.Regular, GraphicsUnit.Point, 128);
             txtPreview.ForeColor = Color.White;
-            txtPreview.Location = new Point(224, 179);
+            txtPreview.Location = new Point(193, 141);
             txtPreview.Name = "txtPreview";
             txtPreview.ReadOnly = true;
-            txtPreview.Size = new Size(505, 64);
+            txtPreview.Size = new Size(513, 64);
             txtPreview.TabIndex = 13;
             txtPreview.Text = "PREVIEW PAUSED";
             txtPreview.TextAlign = HorizontalAlignment.Center;
@@ -279,15 +272,29 @@
             // 
             // EffectSetting
             // 
+            EffectSetting.Controls.Add(sliderClahe);
             EffectSetting.Controls.Add(ckbClahe);
-            EffectSetting.Controls.Add(ckbNormalize);
             EffectSetting.ForeColor = Color.White;
-            EffectSetting.Location = new Point(12, 249);
+            EffectSetting.Location = new Point(12, 325);
             EffectSetting.Name = "EffectSetting";
             EffectSetting.Size = new Size(121, 71);
             EffectSetting.TabIndex = 17;
             EffectSetting.TabStop = false;
             EffectSetting.Text = "Effect Setting";
+            // 
+            // sliderClahe
+            // 
+            sliderClahe.AutoSize = false;
+            sliderClahe.Location = new Point(6, 44);
+            sliderClahe.Margin = new Padding(3, 0, 3, 3);
+            sliderClahe.Maximum = 100;
+            sliderClahe.Minimum = 1;
+            sliderClahe.Name = "sliderClahe";
+            sliderClahe.Size = new Size(104, 24);
+            sliderClahe.TabIndex = 13;
+            sliderClahe.TickStyle = TickStyle.None;
+            sliderClahe.Value = 50;
+            sliderClahe.Scroll += sliderClahe_Scroll;
             // 
             // ckbAutoStart
             // 
@@ -303,14 +310,13 @@
             // 
             // ProcessTime
             // 
-            ProcessTime.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             ProcessTime.AutoSize = true;
             ProcessTime.BackColor = Color.Black;
             ProcessTime.FlatStyle = FlatStyle.Flat;
             ProcessTime.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
             ProcessTime.ForeColor = Color.White;
             ProcessTime.ImageAlign = ContentAlignment.BottomLeft;
-            ProcessTime.Location = new Point(149, 370);
+            ProcessTime.Location = new Point(149, 295);
             ProcessTime.Name = "ProcessTime";
             ProcessTime.Size = new Size(70, 25);
             ProcessTime.TabIndex = 17;
@@ -322,9 +328,9 @@
             Address.Controls.Add(RightAddress);
             Address.Controls.Add(LeftAddress);
             Address.ForeColor = Color.White;
-            Address.Location = new Point(12, 326);
+            Address.Location = new Point(12, 249);
             Address.Name = "Address";
-            Address.Size = new Size(121, 71);
+            Address.Size = new Size(121, 70);
             Address.TabIndex = 18;
             Address.TabStop = false;
             Address.Text = "Address";
@@ -334,10 +340,11 @@
             RightAddress.BackColor = Color.FromArgb(64, 64, 64);
             RightAddress.BorderStyle = BorderStyle.None;
             RightAddress.ForeColor = Color.White;
-            RightAddress.Location = new Point(7, 44);
+            RightAddress.Location = new Point(8, 43);
+            RightAddress.Margin = new Padding(5);
             RightAddress.Name = "RightAddress";
             RightAddress.ReadOnly = true;
-            RightAddress.Size = new Size(108, 16);
+            RightAddress.Size = new Size(105, 16);
             RightAddress.TabIndex = 1;
             // 
             // LeftAddress
@@ -345,34 +352,94 @@
             LeftAddress.BackColor = Color.FromArgb(64, 64, 64);
             LeftAddress.BorderStyle = BorderStyle.None;
             LeftAddress.ForeColor = Color.White;
-            LeftAddress.Location = new Point(7, 22);
+            LeftAddress.Location = new Point(8, 17);
+            LeftAddress.Margin = new Padding(5);
             LeftAddress.Name = "LeftAddress";
             LeftAddress.ReadOnly = true;
-            LeftAddress.Size = new Size(108, 16);
+            LeftAddress.Size = new Size(105, 16);
             LeftAddress.TabIndex = 0;
             // 
             // ExternalOptions
             // 
+            ExternalOptions.Controls.Add(Label_ETVR);
+            ExternalOptions.Controls.Add(btnAffinityApply);
+            ExternalOptions.Controls.Add(txtAffinity);
+            ExternalOptions.Controls.Add(Label_Affinity);
             ExternalOptions.Controls.Add(ckbETVR);
             ExternalOptions.Controls.Add(btnBrowse);
             ExternalOptions.Controls.Add(txtETVRPath);
             ExternalOptions.ForeColor = Color.White;
-            ExternalOptions.Location = new Point(12, 403);
+            ExternalOptions.Location = new Point(149, 326);
             ExternalOptions.Name = "ExternalOptions";
-            ExternalOptions.Size = new Size(776, 38);
+            ExternalOptions.Size = new Size(600, 70);
             ExternalOptions.TabIndex = 2;
             ExternalOptions.TabStop = false;
             ExternalOptions.Text = "ExternalOptions";
             // 
+            // Label_ETVR
+            // 
+            Label_ETVR.AutoSize = true;
+            Label_ETVR.Location = new Point(8, 18);
+            Label_ETVR.Margin = new Padding(5);
+            Label_ETVR.Name = "Label_ETVR";
+            Label_ETVR.Size = new Size(60, 15);
+            Label_ETVR.TabIndex = 20;
+            Label_ETVR.Text = "ETVR Path";
+            // 
+            // btnAffinityApply
+            // 
+            btnAffinityApply.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAffinityApply.BackColor = Color.FromArgb(64, 64, 64);
+            btnAffinityApply.BackgroundImageLayout = ImageLayout.None;
+            btnAffinityApply.FlatAppearance.BorderColor = Color.DimGray;
+            btnAffinityApply.FlatAppearance.BorderSize = 0;
+            btnAffinityApply.FlatStyle = FlatStyle.Flat;
+            btnAffinityApply.Font = new Font("Yu Gothic UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAffinityApply.ForeColor = Color.White;
+            btnAffinityApply.Location = new Point(519, 39);
+            btnAffinityApply.Name = "btnAffinityApply";
+            btnAffinityApply.Size = new Size(73, 21);
+            btnAffinityApply.TabIndex = 19;
+            btnAffinityApply.Text = "Apply";
+            btnAffinityApply.TextAlign = ContentAlignment.TopCenter;
+            btnAffinityApply.UseVisualStyleBackColor = true;
+            btnAffinityApply.Click += btnAffinity_Click;
+            // 
+            // txtAffinity
+            // 
+            txtAffinity.BackColor = Color.FromArgb(64, 64, 64);
+            txtAffinity.BorderStyle = BorderStyle.None;
+            txtAffinity.ForeColor = Color.White;
+            txtAffinity.Location = new Point(88, 42);
+            txtAffinity.Margin = new Padding(5);
+            txtAffinity.MaxLength = 64;
+            txtAffinity.Name = "txtAffinity";
+            txtAffinity.ShortcutsEnabled = false;
+            txtAffinity.Size = new Size(423, 16);
+            txtAffinity.TabIndex = 2;
+            txtAffinity.TextChanged += txtAffinity_TextChanged;
+            // 
+            // Label_Affinity
+            // 
+            Label_Affinity.AutoSize = true;
+            Label_Affinity.Location = new Point(8, 43);
+            Label_Affinity.Margin = new Padding(5);
+            Label_Affinity.Name = "Label_Affinity";
+            Label_Affinity.Size = new Size(70, 15);
+            Label_Affinity.TabIndex = 17;
+            Label_Affinity.Text = "CPU Affinity";
+            // 
             // ckbETVR
             // 
+            ckbETVR.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ckbETVR.AutoSize = true;
             ckbETVR.FlatStyle = FlatStyle.Flat;
-            ckbETVR.Location = new Point(6, 15);
+            ckbETVR.Location = new Point(519, 14);
+            ckbETVR.Margin = new Padding(5);
             ckbETVR.Name = "ckbETVR";
-            ckbETVR.Size = new Size(109, 19);
+            ckbETVR.Size = new Size(73, 19);
             ckbETVR.TabIndex = 13;
-            ckbETVR.Text = "EyeTrackVR Path";
+            ckbETVR.Text = "Auto Run";
             ckbETVR.UseVisualStyleBackColor = true;
             // 
             // btnBrowse
@@ -382,8 +449,8 @@
             btnBrowse.FlatStyle = FlatStyle.Popup;
             btnBrowse.Font = new Font("Yu Gothic UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
             btnBrowse.ForeColor = Color.White;
-            btnBrowse.Location = new Point(748, 15);
-            btnBrowse.Margin = new Padding(0);
+            btnBrowse.Location = new Point(489, 14);
+            btnBrowse.Margin = new Padding(0, 0, 0, 3);
             btnBrowse.Name = "btnBrowse";
             btnBrowse.Size = new Size(22, 18);
             btnBrowse.TabIndex = 19;
@@ -396,10 +463,11 @@
             txtETVRPath.BackColor = Color.FromArgb(64, 64, 64);
             txtETVRPath.BorderStyle = BorderStyle.None;
             txtETVRPath.ForeColor = Color.White;
-            txtETVRPath.Location = new Point(121, 16);
+            txtETVRPath.Location = new Point(88, 16);
+            txtETVRPath.Margin = new Padding(5);
             txtETVRPath.Name = "txtETVRPath";
             txtETVRPath.ReadOnly = true;
-            txtETVRPath.Size = new Size(627, 16);
+            txtETVRPath.Size = new Size(423, 16);
             txtETVRPath.TabIndex = 2;
             // 
             // EyeCameraStreamer
@@ -407,7 +475,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(32, 32, 32);
-            ClientSize = new Size(800, 451);
+            ClientSize = new Size(764, 406);
             Controls.Add(ExternalOptions);
             Controls.Add(Address);
             Controls.Add(ProcessTime);
@@ -419,6 +487,9 @@
             Controls.Add(btnToggle);
             Controls.Add(comboBoxCameras);
             Controls.Add(StaticSetting);
+            MaximizeBox = false;
+            MaximumSize = new Size(780, 445);
+            MinimumSize = new Size(780, 445);
             Name = "EyeCameraStreamer";
             Text = "EyeCameraStreamer";
             FormClosing += OnClosing;
@@ -428,6 +499,7 @@
             StaticSetting.PerformLayout();
             EffectSetting.ResumeLayout(false);
             EffectSetting.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)sliderClahe).EndInit();
             Address.ResumeLayout(false);
             Address.PerformLayout();
             ExternalOptions.ResumeLayout(false);
@@ -447,7 +519,6 @@
         private Label Label_RightPort;
         private Label Label_TargetFps;
         private TextBox txtFps;
-        private CheckBox ckbNormalize;
         private CheckBox ckbClahe;
         private TextBox txtPreview;
         private GroupBox EffectSetting;
@@ -466,5 +537,10 @@
         private TextBox txtETVRPath;
         private Button btnBrowse;
         private CheckBox ckbETVR;
+        private Label Label_Affinity;
+        private TextBox txtAffinity;
+        private Button btnAffinityApply;
+        private Label Label_ETVR;
+        private TrackBar sliderClahe;
     }
 }

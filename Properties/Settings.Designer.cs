@@ -86,18 +86,6 @@ namespace EyeCameraStreamer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Normalize {
-            get {
-                return ((bool)(this["Normalize"]));
-            }
-            set {
-                this["Normalize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool Clahe {
             get {
                 return ((bool)(this["Clahe"]));
@@ -106,7 +94,22 @@ namespace EyeCameraStreamer.Properties {
                 this["Clahe"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int ClaheLimit
+        {
+            get
+            {
+                return ((int)(this["ClaheLimit"]));
+            }
+            set
+            {
+                this["ClaheLimit"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -152,6 +155,18 @@ namespace EyeCameraStreamer.Properties {
             }
             set {
                 this["EyeTrackVR"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Affinity {
+            get {
+                return ((string)(this["Affinity"]));
+            }
+            set {
+                this["Affinity"] = value;
             }
         }
     }

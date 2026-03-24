@@ -13,6 +13,7 @@
     <PackageReference Include="OpenCvSharp4" Version="4.13.0.20260308" />
     <PackageReference Include="OpenCvSharp4.Extensions" Version="4.13.0.20260308" />
     <PackageReference Include="OpenCvSharp4.Windows" Version="4.13.0.20260302" />
+    <PackageReference Include="System.Management" Version="10.0.5" />
   </ItemGroup>
 
   <ItemGroup>
