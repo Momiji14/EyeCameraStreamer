@@ -46,6 +46,8 @@
             Label_Size = new Label();
             Label_CameraId = new Label();
             EffectSetting = new GroupBox();
+            sliderGamma = new TrackBar();
+            ckbGamma = new CheckBox();
             sliderClahe = new TrackBar();
             ckbAutoStart = new CheckBox();
             ProcessTime = new Label();
@@ -63,6 +65,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBoxPreview).BeginInit();
             StaticSetting.SuspendLayout();
             EffectSetting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)sliderGamma).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sliderClahe).BeginInit();
             Address.SuspendLayout();
             ExternalOptions.SuspendLayout();
@@ -272,25 +275,52 @@
             // 
             // EffectSetting
             // 
+            EffectSetting.Controls.Add(sliderGamma);
+            EffectSetting.Controls.Add(ckbGamma);
             EffectSetting.Controls.Add(sliderClahe);
             EffectSetting.Controls.Add(ckbClahe);
             EffectSetting.ForeColor = Color.White;
             EffectSetting.Location = new Point(12, 325);
             EffectSetting.Name = "EffectSetting";
-            EffectSetting.Size = new Size(121, 71);
+            EffectSetting.Size = new Size(163, 71);
             EffectSetting.TabIndex = 17;
             EffectSetting.TabStop = false;
             EffectSetting.Text = "Effect Setting";
             // 
+            // sliderGamma
+            // 
+            sliderGamma.AutoSize = false;
+            sliderGamma.Location = new Point(65, 45);
+            sliderGamma.Margin = new Padding(3, 0, 3, 3);
+            sliderGamma.Maximum = 100;
+            sliderGamma.Minimum = 20;
+            sliderGamma.Name = "sliderGamma";
+            sliderGamma.Size = new Size(92, 24);
+            sliderGamma.TabIndex = 15;
+            sliderGamma.TickStyle = TickStyle.None;
+            sliderGamma.Value = 50;
+            sliderGamma.Scroll += sliderGamma_Scroll;
+            // 
+            // ckbGamma
+            // 
+            ckbGamma.AutoSize = true;
+            ckbGamma.FlatStyle = FlatStyle.Flat;
+            ckbGamma.Location = new Point(7, 45);
+            ckbGamma.Name = "ckbGamma";
+            ckbGamma.Size = new Size(63, 19);
+            ckbGamma.TabIndex = 14;
+            ckbGamma.Text = "Gamma";
+            ckbGamma.UseVisualStyleBackColor = true;
+            // 
             // sliderClahe
             // 
             sliderClahe.AutoSize = false;
-            sliderClahe.Location = new Point(6, 44);
+            sliderClahe.Location = new Point(65, 22);
             sliderClahe.Margin = new Padding(3, 0, 3, 3);
             sliderClahe.Maximum = 100;
             sliderClahe.Minimum = 1;
             sliderClahe.Name = "sliderClahe";
-            sliderClahe.Size = new Size(104, 24);
+            sliderClahe.Size = new Size(92, 24);
             sliderClahe.TabIndex = 13;
             sliderClahe.TickStyle = TickStyle.None;
             sliderClahe.Value = 50;
@@ -369,9 +399,9 @@
             ExternalOptions.Controls.Add(btnBrowse);
             ExternalOptions.Controls.Add(txtETVRPath);
             ExternalOptions.ForeColor = Color.White;
-            ExternalOptions.Location = new Point(149, 326);
+            ExternalOptions.Location = new Point(270, 326);
             ExternalOptions.Name = "ExternalOptions";
-            ExternalOptions.Size = new Size(600, 70);
+            ExternalOptions.Size = new Size(479, 70);
             ExternalOptions.TabIndex = 2;
             ExternalOptions.TabStop = false;
             ExternalOptions.Text = "ExternalOptions";
@@ -396,7 +426,7 @@
             btnAffinityApply.FlatStyle = FlatStyle.Flat;
             btnAffinityApply.Font = new Font("Yu Gothic UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnAffinityApply.ForeColor = Color.White;
-            btnAffinityApply.Location = new Point(519, 39);
+            btnAffinityApply.Location = new Point(398, 39);
             btnAffinityApply.Name = "btnAffinityApply";
             btnAffinityApply.Size = new Size(73, 21);
             btnAffinityApply.TabIndex = 19;
@@ -415,7 +445,7 @@
             txtAffinity.MaxLength = 64;
             txtAffinity.Name = "txtAffinity";
             txtAffinity.ShortcutsEnabled = false;
-            txtAffinity.Size = new Size(423, 16);
+            txtAffinity.Size = new Size(304, 16);
             txtAffinity.TabIndex = 2;
             txtAffinity.TextChanged += txtAffinity_TextChanged;
             // 
@@ -434,7 +464,7 @@
             ckbETVR.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ckbETVR.AutoSize = true;
             ckbETVR.FlatStyle = FlatStyle.Flat;
-            ckbETVR.Location = new Point(519, 14);
+            ckbETVR.Location = new Point(398, 14);
             ckbETVR.Margin = new Padding(5);
             ckbETVR.Name = "ckbETVR";
             ckbETVR.Size = new Size(73, 19);
@@ -449,7 +479,7 @@
             btnBrowse.FlatStyle = FlatStyle.Popup;
             btnBrowse.Font = new Font("Yu Gothic UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
             btnBrowse.ForeColor = Color.White;
-            btnBrowse.Location = new Point(489, 14);
+            btnBrowse.Location = new Point(370, 14);
             btnBrowse.Margin = new Padding(0, 0, 0, 3);
             btnBrowse.Name = "btnBrowse";
             btnBrowse.Size = new Size(22, 18);
@@ -467,7 +497,7 @@
             txtETVRPath.Margin = new Padding(5);
             txtETVRPath.Name = "txtETVRPath";
             txtETVRPath.ReadOnly = true;
-            txtETVRPath.Size = new Size(423, 16);
+            txtETVRPath.Size = new Size(304, 16);
             txtETVRPath.TabIndex = 2;
             // 
             // EyeCameraStreamer
@@ -499,6 +529,7 @@
             StaticSetting.PerformLayout();
             EffectSetting.ResumeLayout(false);
             EffectSetting.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)sliderGamma).EndInit();
             ((System.ComponentModel.ISupportInitialize)sliderClahe).EndInit();
             Address.ResumeLayout(false);
             Address.PerformLayout();
@@ -542,5 +573,7 @@
         private Button btnAffinityApply;
         private Label Label_ETVR;
         private TrackBar sliderClahe;
+        private TrackBar sliderGamma;
+        private CheckBox ckbGamma;
     }
 }

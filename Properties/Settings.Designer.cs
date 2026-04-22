@@ -94,22 +94,7 @@ namespace EyeCameraStreamer.Properties {
                 this["Clahe"] = value;
             }
         }
-
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
-        public int ClaheLimit
-        {
-            get
-            {
-                return ((int)(this["ClaheLimit"]));
-            }
-            set
-            {
-                this["ClaheLimit"] = value;
-            }
-        }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -167,6 +152,42 @@ namespace EyeCameraStreamer.Properties {
             }
             set {
                 this["Affinity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int ClaheLimit {
+            get {
+                return ((int)(this["ClaheLimit"]));
+            }
+            set {
+                this["ClaheLimit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int GammaValue {
+            get {
+                return ((int)(this["GammaValue"]));
+            }
+            set {
+                this["GammaValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Gamma {
+            get {
+                return ((bool)(this["Gamma"]));
+            }
+            set {
+                this["Gamma"] = value;
             }
         }
     }

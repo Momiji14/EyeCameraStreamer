@@ -7,6 +7,7 @@ namespace EyeCameraStreamer
     internal class Core(EyeCameraStreamer form, EyeTrackVRExecute ETVR, Effect effect)
     {
         public bool isStreaming = false;
+        public bool shouldGamma = false;
         public bool shouldClahe = false;
         public int fps = 30;
 
@@ -111,6 +112,8 @@ namespace EyeCameraStreamer
                     {
                         Cv2.CvtColor(frame, frame, ColorConversionCodes.BGR2GRAY);
 
+                        if (shouldGamma)
+                            effect.ProcessGamma(frame);
                         if (shouldClahe)
                             effect.ProcessClahe(frame);
 

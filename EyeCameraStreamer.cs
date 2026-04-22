@@ -34,6 +34,7 @@ namespace EyeCameraStreamer
             };
 
             ckbClahe.CheckedChanged += (s, e) => core.shouldClahe = ckbClahe.Checked;
+            ckbGamma.CheckedChanged += (s, e) => core.shouldGamma = ckbGamma.Checked;
         }
 
         private void OnLoad(object sender, EventArgs e)
@@ -49,6 +50,8 @@ namespace EyeCameraStreamer
             txtPortRight.Text = Properties.Settings.Default.PortRight.ToString();
             txtFps.Text = Properties.Settings.Default.TargetFps.ToString();
 
+            ckbGamma.Checked = Properties.Settings.Default.Gamma;
+            sliderGamma.Value = Properties.Settings.Default.GammaValue;
             ckbClahe.Checked = Properties.Settings.Default.Clahe;
             sliderClahe.Value = Properties.Settings.Default.ClaheLimit;
 
@@ -58,6 +61,7 @@ namespace EyeCameraStreamer
             txtAffinity.Text = Properties.Settings.Default.Affinity;
 
             SetAffinity();
+            effect.UpdateGamma();
             effect.UpdateClaheClipLimit();
             if (autoStart)
                 core.StartAction();
@@ -124,6 +128,13 @@ namespace EyeCameraStreamer
             effect.UpdateClaheClipLimit();
         }
 
+        private void sliderGamma_Scroll(object sender, EventArgs e)
+        {
+            TrackBar slider = (TrackBar)sender;
+            Properties.Settings.Default.GammaValue = slider.Value;
+            effect.UpdateGamma();
+        }
+
         private void SaveConfig()
         {
             Properties.Settings.Default.CameraIndex = comboBoxCameras.SelectedIndex;
@@ -135,6 +146,8 @@ namespace EyeCameraStreamer
             Properties.Settings.Default.PortRight = int.TryParse(txtPortRight.Text, out int portR) ? portR : 808;
             Properties.Settings.Default.TargetFps = int.TryParse(txtFps.Text, out int fps) ? fps : 30;
 
+            Properties.Settings.Default.Gamma = ckbGamma.Checked;
+            Properties.Settings.Default.GammaValue = sliderGamma.Value;
             Properties.Settings.Default.Clahe = ckbClahe.Checked;
             Properties.Settings.Default.ClaheLimit = sliderClahe.Value;
 
